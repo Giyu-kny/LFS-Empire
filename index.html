@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LFS <3 | The Aesthetic Empire</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --forest: #2d4c3b;
+            --moss: #91a38a;
+            --earth: #795c48;
+            --petal: #fbc2eb;
+            --white: rgba(255, 255, 255, 0.15);
+            --glow: 0 0 25px rgba(251, 194, 235, 0.5);
+            --mono: 'Courier Prime', monospace;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: #e1e0c9;
+            background: linear-gradient(135deg, #e1e0c9 0%, #91a38a 50%, #795c48 100%);
+            background-attachment: fixed;
+            font-family: 'Poppins', sans-serif;
+            color: var(--forest);
+            overflow-x: hidden;
+        }
+
+        /* Moving Background Pattern */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/leaf.png');
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
+            animation: backgroundScroll 60s linear infinite;
+        }
+
+        @keyframes backgroundScroll {
+            from { background-position: 0 0; }
+            to { background-position: 500px 500px; }
+        }
+
+        .container { 
+            max-width: 1000px; 
+            margin: 0 auto; 
+            padding: 60px 20px; 
+            position: relative; 
+            z-index: 2; 
+        }
+
+        /* Topic Bars with Shine Effect */
+        .topic-bar {
+            background: linear-gradient(90deg, var(--forest), var(--earth));
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px 0 50px 0;
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 1rem;
+            letter-spacing: 4px;
+            margin-top: 40px;
+            border-left: 8px solid var(--petal);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .topic-bar::after {
+            content: "";
+            position: absolute;
+            top: -50%; left: -100%;
+            width: 50%; height: 200%;
+            background: rgba(255,255,255,0.2);
+            transform: rotate(30deg);
+            animation: shine 4s infinite;
+        }
+
+        @keyframes shine {
+            to { left: 150%; }
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: var(--white);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 0 30px 30px 30px;
+            padding: 50px;
+            margin-bottom: 80px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            transition: 0.5s;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--glow);
+            border-color: var(--petal);
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin: 0;
+            text-align: center;
+            background: linear-gradient(to right, var(--forest), var(--petal), var(--earth));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
+        }
+
+        .mono-label {
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            color: var(--earth);
+            text-transform: uppercase;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .rule-para {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 15px;
+            border-left: 0px solid var(--petal);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .rule-para:hover {
+            border-left: 12px solid var(--petal);
+            background: rgba(255,255,255,0.4);
+            transform: translateX(15px);
+        }
+
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 20px; }
+
+        .grid-item { 
+            background: rgba(255,255,255,0.3); 
+            padding: 25px; 
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.5);
+            text-align: center;
+            transition: 0.4s;
+        }
+        .grid-item:hover { transform: scale(1.08); background: white; border-color: var(--petal); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+        .role-tag { font-family: var(--mono); font-size: 0.75rem; color: var(--moss); text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 8px; }
+
+        /* Canvas Overlay */
+        #canvas-particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+
+        .cta-btn {
+            font-family: var(--mono);
+            padding: 18px 40px;
+            background: var(--forest);
+            color: white !important;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: 0.4s;
+            display: inline-block;
+            margin: 15px;
+            font-weight: bold;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: none;
+        }
+        .cta-btn:hover { transform: translateY(-5px); filter: brightness(1.2); box-shadow: var(--glow); }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #e1e0c9; }
+        ::-webkit-scrollbar-thumb { background: var(--forest); border-radius: 5px; }
+
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas-particles"></canvas>
+
+    <div class="container">
+        <header style="text-align: center; margin-bottom: 100px;" data-aos="fade-down" data-aos-duration="1500">
+            <span class="mono-label">[ ESTABLISHED 2026 ]</span>
+            <h2 class="main-title">Love at First Sight <3</h2>
+            <p class="mono-label">MultiCraft Invite Code: <span style="color: white; background: var(--forest); padding: 5px 15px; border-radius: 5px; box-shadow: var(--glow);">03JQ46QF</span></p>
+        </header>
+
+        <div class="topic-bar" data-aos="fade-right">01_EMPIRE_NOTICES</div>
+        <div class="glass-card" data-aos="zoom-in-up">
+            <div style="font-family: var(--mono); font-size: 1rem; line-height: 1.8;">
+                <p style="color: var(--earth); font-weight: bold; font-size: 1.2rem;">✧——— LFS x HKS: THE TAKEOVER ———✧</p>
+                <p>> "Greatness is not found in standing alone, but in building an empire together." 🤝✨</p>
+                <p>ATTENTION COMMUNITY, The landscape of the sandbox just changed. We are hyped to officially announce that Love at First Sight (LFS) has locked in a legendary collaboration with Hot Kiss Server (HKS) as of 05 February 2026! 💍🔥</p>
+                <p><b>📜 THE NEW STANDARDS:</b> LFS and HKS are now officially integrated. Promoting HKS is now FULLY PERMITTED within the LFS ecosystem. We are tracking our player averages closely, and with this union, we’re aiming for the top of the leaderboards! 📈</p>
+                <p><b>💎 WHY THIS MATTERS:</b> We aren't just two servers anymore; we are one massive family. Expect more events, higher player counts, and a vibe that nobody else can touch.</p>
+                <hr style="border: 0; border-top: 2px dashed var(--moss); margin: 30px 0;">
+                <p style="color: var(--earth); font-weight: bold; font-size: 1.2rem;">🏰 THE GATES ARE FULLY OPEN!</p>
+                <p>Good News! Today, the Love at First Sight MultiCraft server has been officially unflagged as an 18+ server! Our appeal was successful and the shadow has been lifted. 🛡️</p>
+                <p><b>🛡️ WHAT THIS MEANS FOR YOU:</b> iOS/Mobile Players: You can now join freely without any restricted access warnings! Visibility: Our kingdom is now visible to the entire world once again. Growth: We are officially a safe, social, and elite sanctuary for all. Thank you for staying loyal through the transition. Let the celebrations begin! 🥂</p>
+            </div>
+        </div>
+
+        <div class="topic-bar" data-aos="fade-right">02_SANCTUARY_PROTOCOLS</div>
+        <div class="glass-card" data-aos="fade-up">
+            <div class="rule-para" data-aos="fade-left">
+                <b>Ⅰ. Promotion & Solicitation:</b> Unauthorized promotion of other servers, websites, or social media handles is strictly forbidden. Posting links or DM advertising members without consent will result in an <b>immediate and permanent ban</b>. We protect our community from external clutter.
+            </div>
+            <div class="rule-para" data-aos="fade-left" data-aos-delay="100">
+                <b>Ⅱ. Integrity & Exploits:</b> We maintain a fair environment. Any use of hacking clients, X-ray packs, or third-party software that provides an unfair advantage is strictly prohibited. Violators will be <b>blacklisted</b> from the realm without the possibility of appeal.
+            </div>
+            <div class="rule-para" data-aos="fade-left" data-aos-delay="200">
+                <b>Ⅲ. Griefing & Disruption:</b> Respect the creativity of others. Any attempt to damage, steal from, or alter builds that do not belong to you will result in <b>immediate removal and a rollback</b> of your actions. Our landscape is our legacy; do not deface it.
+            </div>
+            <div class="rule-para" data-aos="fade-left" data-aos-delay="300">
+                <b>Ⅳ. Linguistic Etiquette:</b> This is an aesthetic sanctuary. Use of profanity, slurs, or toxic language in global chat is prohibited. Keep your interactions refined and respectful. Speak with the grace that the realm deserves.
+            </div>
+            <div class="rule-para" data-aos="fade-left" data-aos-delay="400">
+                <b>Ⅴ. Social Relations:</b> We allow respectful social connections and dating within the community. However, harassment, "catfishing," or unwanted advances will result in an <b>instant ban</b> to protect our members. Consent and respect are mandatory.
+            </div>
+            <div class="rule-para" data-aos="fade-left" data-aos-delay="500">
+                <b>Ⅵ. Administrative Discretion:</b> Staff decisions are final. If you are asked to stop a behavior by a Council member, comply immediately. <b>Leave your drama at the gate.</b> We are here to coexist in peace.
+            </div>
+        </div>
+
+        <div class="topic-bar" data-aos="fade-right">03_HIGH_HASHIRA_MANUAL</div>
+        <div class="glass-card" data-aos="fade-up">
+            <p style="text-align: center; font-style: italic; font-family: 'Playfair Display'; font-size: 1.5rem; margin-bottom: 40px;">“The water reflects only what is true. To lead this realm, one must be pure of heart, firm in discipline, and loyal to the calm.”</p>
+            
+            <span class="mono-label">> PART Ⅰ﹕THE MANDATORY REQUIREMENTS</span>
+            <div class="rule-para">
+                ◈ <b>Age & Maturity:</b> You must be at least 12 years of age. We require leaders who can handle conflict without losing their composure.<br>
+                ◈ <b>Digital Presence:</b> A verified Discord account is required for communication. You must remain active for at least 30 minutes daily on the server.<br>
+                ◈ <b>The Clean Slate:</b> Your history must be free of bans, severe griefing, or toxicity. We do not hire those who have previously disturbed the peace.<br>
+                ◈ <b>Artistic Proof:</b> You must provide coordinates to 5 unique, high-quality builds you have personally created within our realm.
+            </div>
+
+            <span class="mono-label">> PART Ⅱ﹕𝓣𝓱𝓮 𝓠𝓾𝓮𝓼𝓽𝓲𝓸𝓷𝓷𝓪𝓲𝓻𝓮</span>
+            <div class="rule-para">
+                Please answer these questions honestly in a Signed Book and submit it to the Council.<br>
+                1. Identity | 2. Dedication | 3. History | 4. Geography (5 coords) | 5. Purpose | 6. Value | 7. Transparency | 8. Experience<br><br>
+                <b>𝐒𝐜𝐞𝐧𝐚𝐫𝐢𝐨 𝐀:</b> A player is using profanity in the global chat despite multiple warnings. How do you handle it without escalating the drama?<br>
+                <b>𝐒𝐜𝐞𝐧𝐚𝐫𝐢𝐨 𝐁:</b> You catch a well-known player using a hacking client. What is your process for gathering evidence and reporting it?<br>
+                <b>𝐒𝐜𝐞𝐧𝐚𝐫𝐢𝐨 𝐂:</b> A member reports a fellow staff member for abuse of power. What are your next steps to ensure justice?
+            </div>
+
+            <span class="mono-label">> PART Ⅲ﹕𝓣𝓱𝓮 𝓢𝓽𝓪𝓯𝓯 𝓒𝓸𝓭𝓮 𝓸𝓯 𝓒𝓸𝓷𝓭𝓾𝓬𝓽</span>
+            <div class="rule-para">
+                ◈ <b>Ⅰ. Purity of Speech:</b> Staff are forbidden from cursing or being toxic. If you argue or insult players, you fail your duty immediately.<br>
+                ◈ <b>Ⅱ. Vow of Fairness:</b> You shall not use commands (/give, /tp, /fly) to benefit yourself or your friends in survival play.<br>
+                ◈ <b>Ⅲ. Rule of Ten:</b> If we receive 10 or more valid complaints regarding your behavior, you will be suspended pending trial.<br>
+                ◈ <b>Ⅳ. Proof of Justice:</b> No punishment without evidence. You must take screenshots/videos before issuing a ban.<br>
+                ◈ <b>Ⅴ. Divine Rewards:</b> A perfect record for one week results in exclusive tokens of gratitude from the Council.
+            </div>
+
+            <span class="mono-label">> PART Ⅳ﹕𝓐 𝓦𝓸𝓻𝓭 𝓸𝓯 𝓔𝓷𝓬𝓸𝓾𝓻𝓪𝓰𝓮𝓶𝓮𝓷𝓽</span>
+            <p style="font-family: var(--mono); font-size: 0.9rem;">“Even the strongest river begins as a single drop of rain.” If you are not selected today, do not let your spirit wither. The water is always moving, and new opportunities will arise. Build, lead, and stay loyal.</p>
+        </div>
+
+        <div class="topic-bar" data-aos="fade-right">04_THE_EMPIRE_GEOGRAPHY</div>
+        <div class="glass-card" data-aos="fade-up">
+            <div class="grid-layout">
+                <div class="grid-item" data-aos="flip-left"><span class="role-tag">Imperial</span>🌸 JaPaNeSe~MaNsIoN</div>
+                <div class="grid-item" data-aos="flip-left" data-aos-delay="100"><span class="role-tag">Spawn</span>🔱 Blue Spawn</div>
+                <div class="grid-item" data-aos="flip-left" data-aos-delay="200"><span class="role-tag">Nature</span>🌲 Border Lands</div>
+                <div class="grid-item" data-aos="flip-left" data-aos-delay="300"><span class="role-tag">Sports</span>⚽ Football_Stadium</div>
+                <div class="grid-item" data-aos="flip-left" data-aos-delay="400"><span class="role-tag">Social</span>🏷️ Tags</div>
+                <div class="grid-item" data-aos="flip-left" data-aos-delay="500"><span class="role-tag">Games</span>🛸 T Or D</div>
+                <div class="grid-item" data-aos="flip-left" data-aos-delay="600"><span class="role-tag">Romance</span>❤️ Beautiful Dating Area</div>
+                <div class="grid-item" data-aos="flip-left" data-aos-delay="700"><span class="role-tag">Void</span>⚫ VoId</div>
+                <div class="grid-item" data-aos="flip-left"><span class="role-tag">Social</span>🎭 Drama^Hall</div>
+                <div class="grid-item" data-aos="flip-left"><span class="role-tag">Admin</span>⚜️ Staff applications</div>
+                <div class="grid-item" data-aos="flip-left"><span class="role-tag">Legacy</span>☁️ StOnE~KinGDoM</div>
+                <div class="grid-item" data-aos="flip-left"><span class="role-tag">District</span>🛠️ CiTy</div>
+                <div class="grid-item" data-aos="flip-left"><span class="role-tag">Council</span>🦅 SaSuke/TsUnAdE</div>
+                <div class="grid-item" data-aos="flip-left"><span class="role-tag">Nature</span>🎀 Bl0sSoM~LaNd</div>
+            </div>
+        </div>
+
+        <div class="topic-bar" data-aos="fade-right">05_THE_HIGH_COUNCIL</div>
+        <div class="glass-card" data-aos="fade-up">
+            <div class="grid-layout">
+                <div class="grid-item" data-aos="zoom-in"><span class="role-tag">The Eternal Owner</span><b>Itachi_Uchiha</b></div>
+                <div class="grid-item" data-aos="zoom-in" data-aos-delay="100"><span class="role-tag">The Radiant Co-Owner</span><b>HOT_BOY_INFINITE</b></div>
+                <div class="grid-item" data-aos="zoom-in" data-aos-delay="200"><span class="role-tag">The Shadow Co-Owner</span><b>Sasuke-Uchiha</b></div>
+                <div class="grid-item" data-aos="zoom-in" data-aos-delay="300"><span class="role-tag">The Mystic Admin</span><b>DARK-_X_-RAVEN</b></div>
+                <div class="grid-item" data-aos="zoom-in" data-aos-delay="400"><span class="role-tag">The Bloom Admin</span><b>Sakura_Uchiha</b></div>
+                <div class="grid-item" data-aos="zoom-in" data-aos-delay="500"><span class="role-tag">The Silent Admin</span><b>Takashi_Unichia</b></div>
+            </div>
+        </div>
+
+        <div class="topic-bar" data-aos="fade-right">06_ADMINISTRATIVE_TERMINALS</div>
+        <div class="form-container" style="display: grid; grid-template-columns: 1fr; gap: 30px; margin-bottom: 60px;">
+
+            <div class="glass-card" style="border-left: 8px solid #9e2a2b; margin-bottom: 0;" data-aos="fade-up">
+                <span class="mono-label" style="color: #9e2a2b;">[TERMINAL_01]</span>
+                <h3 style="font-family: 'Playfair Display', serif; margin-top: 5px;">Incident Reporting</h3>
+                <p class="mono-text" style="font-size: 0.85rem;">Secure line for reporting hackers, griefers, or rule violations. Ensure you have evidence ready.</p>
+                <a href="https://forms.gle/BS23JhxLeyjvmnCGA" target="_blank" class="cta-btn" style="background: #9e2a2b;">FILE REPORT NOW</a>
+            </div>
+
+            <div class="glass-card" style="border-left: 8px solid var(--forest); margin-bottom: 0;" data-aos="fade-up" data-aos-delay="200">
+                <span class="mono-label" style="color: var(--forest;">[TERMINAL_02]</span>
+                <h3 style="font-family: 'Playfair Display', serif; margin-top: 5px;">High Hashira Quest</h3>
+                <p class="mono-text" style="font-size: 0.85rem;">Submit your application to join the Council. Must meet all Part I requirements.</p>
+                <a href="https://forms.gle/tnGiaByLmT3fERiL9" target="_blank" class="cta-btn" style="background: var(--forest);">SUBMIT APPLICATION</a>
+            </div>
+
+            <div class="glass-card" style="border-left: 8px solid var(--earth); margin-bottom: 0;" data-aos="fade-up" data-aos-delay="400">
+                <span class="mono-label" style="color: var(--earth);">[TERMINAL_03]</span>
+                <h3 style="font-family: 'Playfair Display', serif; margin-top: 5px;">Sanctuary Feedback</h3>
+                <p class="mono-text" style="font-size: 0.85rem;">Help us refine the kingdom. Submit suggestions for improvements.</p>
+                <a href="https://forms.gle/6drPPYRDwsSFV6gA9" target="_blank" class="cta-btn" style="background: var(--earth);">SEND SUGGESTION</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: false, mirror: true });
+
+        const canvas = document.getElementById('canvas-particles');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + 20;
+                this.size = Math.random() * 3 + 1;
+                this.speed = Math.random() * 0.5 + 0.2;
+                this.opacity = Math.random() * 0.5;
+            }
+            update() {
+                this.y -= this.speed;
+                if (this.y < -20) this.reset();
+            }
+            draw() {
+                ctx.fillStyle = `rgba(251, 194, 235, )`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 40; i++) particles.push(new Particle());
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
